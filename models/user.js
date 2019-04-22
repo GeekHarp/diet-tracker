@@ -40,6 +40,10 @@ module.exports = (dbPoolInstance) => {
         })
     };
 
+    let firstTimeUserCheck = () => {
+        dbPoolInstance.query
+    }
+
     return {
         newUser,
         idAndPasswordCheck

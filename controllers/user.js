@@ -35,9 +35,11 @@ module.exports = (db) => {
             // if user && pw is in DB..
             if (loggedInUser !== null) {
                 const hashUsername = sha256(SALT + loggedInUser.username);
+                const userId = loggedInUser.id;
                 response.cookie('username', loggedInUser.username);
                 response.cookie('hashedusername', hashUsername);
-                response.redirect(`/home`);
+                response.cookie('id', loggedInUser.id);
+                response.redirect(`/${userId}`);
             } else {
                 response.status(403).send(`Wrong Username or Password!`);
             }

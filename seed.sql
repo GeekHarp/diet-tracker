@@ -1,6 +1,6 @@
 DROP TABLE users;
 DROP TABLE users_details;
-DROP TABLE calorie_diary;
+DROP TABLE calorie_input;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE users_details (
 	date_created DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
-CREATE TABLE calorie_diary (
+CREATE TABLE calorie_input (
 	id SERIAL PRIMARY KEY,
 	calories INTEGER,
 	user_id INTEGER,

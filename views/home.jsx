@@ -3,8 +3,10 @@ const DefaultLayout = require(`./default.jsx`);
 
 class Home extends React.Component {
     render() {
-        const userObj = this.props; //
-        const userWeight = parseFloat(userObj.weight);
+        const detailsObj = this.props.details; // {}
+        const calorieDiaryArr = this.props.diary; // [{}, {}]
+        // Over here, We calculate the Recommend Calories Intake(RDI)
+        const userWeight = parseFloat(detailsObj.weight);
         let RDI;
         const checkActivityLevel = (activityLevel) => {
             if (activityLevel === 'light') {
@@ -24,6 +26,8 @@ class Home extends React.Component {
                 return RDI += 200;
             } else if (dietGoal === 'wg') {
                 return RDI += 500;
+            } else {
+                return RDI
             }
         }
         const calculateRDI = (weight, gender, activityLevel, dietGoal) => {
@@ -36,7 +40,17 @@ class Home extends React.Component {
             RDI = Math.floor(RDI);
             return RDI;
         }
-        calculateRDI(userWeight, userObj.gender, userObj.activitylevel, userObj.dietgoal);
+        calculateRDI(userWeight, detailsObj.gender, detailsObj.activity_level, detailsObj.diet_goal);
+
+        // We calculate the total calories consumed by THAT user That particular day
+        let totalCalories = 0;
+        const calculateTotalCalories = (arr) => {
+            for (let i = 0; i < arr.length; i++) {
+                totalCalories += arr[i].calories;
+            }
+            return totalCalories;
+        }
+        calculateTotalCalories(calorieDiaryArr);
         return (
             <DefaultLayout title="Homepage">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,10 +64,18 @@ class Home extends React.Component {
                   </div>
                 </nav>
                 <h2>My Calories Diary</h2>
-                <h3>{RDI}</h3>
-                Enter the Calories you Consumed here*: <input type="number" id="calories-input" />
-                <input type="submit" value="Submit" id="submit-button" />
-                <script src="script.js"></script>
+                <canvas id="myChart">
+
+                </canvas>
+                <h3>Recommended Daily Calories {RDI}</h3>
+                <h3>Calories Consumed {totalCalories}</h3>
+                <form action="/newfood" method="POST">
+                    Enter the Calories you Consumed here*: <input type="number" name="calories" id="calories-input" min="0" step="1" />
+                    <input type="submit" value="Submit" id="submit-button" />
+                </form>
+                <button id="button">Click to View Chart</button>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <script src="/script.js"></script>
             </DefaultLayout>
         );
     }

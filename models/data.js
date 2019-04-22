@@ -1,14 +1,40 @@
 module.exports = (dbPoolInstance) => {
-    const selectUser = (query, callback) => {
+
+    const selectData = (query, callback) => {
         dbPoolInstance.query(query, (error, queryResult) => {
             if (error) {
                 callback(error, null);
             } else {
-                // if username exist in DB
-                if (queryResult.rows.length === 1) {
+                // Exist in DB?
+                if (queryResult.rows.length > 0) {
                     callback(null, queryResult.rows[0]);
                 } else {
-                    callback(null, null);
+                    // No result..
+                    callback(null, {
+                        weight : 0,
+                        gender : `female`,
+                        activity_level : `light`,
+                        diet_goal : `maintain`
+                    });
+                }
+            }
+        })
+    };
+
+    const selectMultipleData = (query, callback) => {
+        dbPoolInstance.query(query, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    // This will return an arr of 'calories'
+                    // console.log(`******************************`);
+                    // console.log(`Inside models = ${queryResult.rows}`); // [{}, {}]
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, [{
+                        calories : 0
+                    }]);
                 }
             }
         })
@@ -22,8 +48,9 @@ module.exports = (dbPoolInstance) => {
             } else {
                 // DB did something..
                 if (queryResult.rows.length > 0) {
-                    callback(null, queryResult.rows);
-                    console.log(`New User's Data Inserted`);
+
+                    callback(null, queryResult.rows[0]);
+                    console.log(`New Data Inserted`);
                 } else {
                     callback(null, null);
                 }
@@ -32,7 +59,8 @@ module.exports = (dbPoolInstance) => {
     };
 
     return {
-        selectUser,
+        selectData,
+        selectMultipleData,
         insertData
     }
 }
