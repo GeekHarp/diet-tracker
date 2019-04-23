@@ -5,6 +5,7 @@ class Register extends React.Component {
     render() {
         return (
             <DefaultLayout title="Register">
+            <div>
                 <h1>Register</h1>
                     <form action="/register" method="POST">
                         <div class="form-group">
@@ -17,6 +18,7 @@ class Register extends React.Component {
                         </div>
                         <input type="submit" value="Register" class="btn btn-dark" />
                     </form>
+            </div>
             </DefaultLayout>
         );
     }

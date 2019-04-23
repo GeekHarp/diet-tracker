@@ -5,7 +5,8 @@ class Register extends React.Component {
     render() {
         return (
             <DefaultLayout title="Register">
-                <h1>We know this is your first time here. Let us help! Give us your Details to begin</h1>
+            <div>
+                <h2>Submit your Infomation. Start your weight loss journey today!</h2>
                     <form action="/newuser" method="POST">
                         Gender: <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" value="male" />
@@ -38,6 +39,7 @@ class Register extends React.Component {
                         Goal Weight: <input type="number" name="goal_weight" step="any" placeholder="Weight" /> Kg<br />
                         <input type="submit" value="Submit" class="btn btn-dark" />
                     </form>
+            </div>
             </DefaultLayout>
         );
     }

@@ -1,0 +1,16 @@
+body {
+	display: flex;
+	justify-content: center;
+	margin-top: 240px;
+	background-image: url(/image/background-image.jpg);
+	background-size: cover;
+}
+
+a {
+	margin: 3px 3px;
+}
+
+p {
+	display: inline;
+	margin-right: 5px;
+}

@@ -3,6 +3,7 @@ module.exports = (app, allModels) => {
     const userController = require('./controllers/user')(allModels);
     const dataController = require(`./controllers/data`)(allModels);
     // ROUTES..
+    app.get(`/`, userController.rootPage);
     app.get(`/register`, userController.registrationForm);
     app.post(`/register`, userController.registerUser);
     app.get(`/login`, userController.loginPage);
@@ -11,10 +12,10 @@ module.exports = (app, allModels) => {
     app.get(`/newuser`, dataController.dataForm);
     app.post(`/newuser`, dataController.insertData);
     app.post(`/newfood`, dataController.insertFoodData);
-    app.get(`/grabdata`, dataController.grabData);
+    // app.get(`/grabdata`, dataController.grabData);
+    // app.get(`/pickdate`, dataController.pickDate);
     // This is the 'homePage'
     app.get(`/:id`, dataController.homePage);
     // app.get(`/:id/progress`, );
     // app.get(`/:id/edit`, );
-    // a way to exclude :id?!
 };

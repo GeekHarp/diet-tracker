@@ -1,0 +1,9 @@
+body {
+	background-image: url(/image/background-image.jpg);
+	background-size: cover;
+	margin-top: 220px;
+}
+
+a {
+	margin: 0 3px;
+}

@@ -16,8 +16,8 @@
 
 // Code to run when we receive the request..
 var responseHandler = () => {
-    console.log(this);
-    // var response = JSON.parse(this.responseText);
+    console.log(this.responseText);
+    var response = JSON.parse(this.responseText);
     // console.log(response);
 
     // console.log(`statusText = ${this.statusText}`); // OK

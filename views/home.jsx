@@ -51,32 +51,43 @@ class Home extends React.Component {
             return totalCalories;
         }
         calculateTotalCalories(calorieDiaryArr);
-        return (
-            <DefaultLayout title="Homepage">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                  <a class="navbar-brand" href="#">Calories Tracker</a>
-                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                      <a class="nav-item nav-link active" href="#">Food Diary</a>
-                      <a class="nav-item nav-link" href="#">Progress</a>
-                      <a class="nav-item nav-link" href="#">Recalculate Daily Calorie Goal</a>
-                    </div>
-                  </div>
-                </nav>
-                <h2>My Calories Diary</h2>
-                <canvas id="myChart">
 
-                </canvas>
-                <h3>Recommended Daily Calories {RDI}</h3>
-                <h3>Calories Consumed {totalCalories}</h3>
-                <form action="/newfood" method="POST">
-                    Enter the Calories you Consumed here*: <input type="number" name="calories" id="calories-input" min="0" step="1" />
-                    <input type="submit" value="Submit" id="submit-button" />
-                </form>
-                <button id="button">Click to View Chart</button>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-                <script src="/script.js"></script>
-            </DefaultLayout>
+        const caloriesLeft = RDI - totalCalories;
+        return (
+            <html>
+            <head>
+                <title>Calories Tracker</title>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+                <link rel="stylesheet" type="text/css" href="/css/home.css" />
+            </head>
+            <body class="container d-flex justify-content-center">
+                <div>
+                    <h1 class="text-center">My Calories Diary</h1>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Recommended Calorie Intake</th>
+                          <th scope="col">Calories Consumed</th>
+                          <th scope="col">Calories Left</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{RDI}</td>
+                          <td>{totalCalories}</td>
+                          <td>{caloriesLeft}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <form action="/newfood" method="POST">
+                        Enter the Calories you Consumed here*: <input type="number" name="calories" min="0" step="1" />
+                        <input type="submit" value="Submit" class="btn btn-dark" />
+                    </form>
+                    <a class="btn btn-dark" href="/newuser" role="button">Submit Details to Start Tracking!</a>
+                    <a class="btn btn-dark" href="/" role="button">Homepage</a>
+                </div>
+            </body>
+            </html>
         );
     }
 }

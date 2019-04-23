@@ -2,6 +2,7 @@ module.exports = (db) => {
 
     // app.get(`/newuser`)
     const dataForm = (request, response) => {
+        // Add a
         response.render(`newuser`);
     }
 
@@ -43,8 +44,7 @@ module.exports = (db) => {
         db.data.selectData(query, (error, selectedUserDetails) => {
             // Passing in 2 obj into home.jsx..
             // For now I will hard-code the query(date) until I got calender figured out
-
-            const secondQuery = `SELECT * FROM calorie_input WHERE user_id = '${reqId}' AND date_created = '2019-04-22'`;
+            const secondQuery = `SELECT * FROM calorie_input WHERE user_id = '${reqId}' AND date_created = '2019-04-23'`;
             db.data.selectMultipleData(secondQuery, (error, selectedCalorieDiary) => {
                 response.render(`home`, {details : selectedUserDetails, diary : selectedCalorieDiary});
             })
@@ -52,80 +52,81 @@ module.exports = (db) => {
     }
 
     // Route for AJAX
-    const grabData = (request, response) => {
-        const userId = parseFloat(request.cookies.id);
-        const query = `SELECT * FROM users_details WHERE user_id = ${userId}`;
-        db.data.selectData(query, (error, selectedUserDetails) => {
-            // Passing in 1 obj and an arr into home.jsx..
-            // For now I will hard-code the query(date) until I got calender figured out
-            const secondQuery = `SELECT * FROM calorie_input WHERE user_id = '${userId}' AND date_created = '2019-04-22'`;
-            db.data.selectMultipleData(secondQuery, (error, selectedCalorieDiary) => {
-                // Get the 'RDI'
-                const detailsObj = selectedUserDetails; // {}
-                // Get the Calories consumed
-                const calorieDiaryArr = selectedCalorieDiary; // [{}, {}]
-                const userWeight = parseFloat(detailsObj.weight);
-                let RDI;
-                const checkActivityLevel = (activityLevel) => {
-                    if (activityLevel === 'light') {
-                        return RDI *= 1.55;
-                    } else if (activityLevel === 'moderate') {
-                        return RDI *= 1.65;
-                    } else if (activityLevel === 'heavy') {
-                        return RDI *= 1.8;
-                    }
-                }
-                const checkDietGoal = (dietGoal) => {
-                    if (dietGoal === 'wl') {
-                        return RDI -= 500;
-                    } else if (dietGoal === 'swl') {
-                        return RDI -= 300;
-                    } else if (dietGoal === 'swg') {
-                        return RDI += 200;
-                    } else if (dietGoal === 'wg') {
-                        return RDI += 500;
-                    } else {
-                        return RDI
-                    }
-                }
-                const calculateRDI = (weight, gender, activityLevel, dietGoal) => {
-                    RDI = weight * 24;
-                    if (gender === 'female') {
-                        RDI *= 0.9;
-                    }
-                    checkActivityLevel(activityLevel);
-                    checkDietGoal(dietGoal);
-                    RDI = Math.floor(RDI);
-                    return RDI;
-                }
-                calculateRDI(userWeight, detailsObj.gender, detailsObj.activity_level, detailsObj.diet_goal);
+    // const grabData = (request, response) => {
+    //     const userId = parseFloat(request.cookies.id);
+    //     const query = `SELECT * FROM users_details WHERE user_id = ${userId}`;
+    //     db.data.selectData(query, (error, selectedUserDetails) => {
+    //         // Passing in 1 obj and an arr into home.jsx..
+    //         // For now I will hard-code the query(date) until I got calender figured out
+    //         const secondQuery = `SELECT * FROM calorie_input WHERE user_id = '${userId}' AND date_created = '2019-04-22'`;
+    //         db.data.selectMultipleData(secondQuery, (error, selectedCalorieDiary) => {
+    //             // Get the 'RDI'
+    //             const detailsObj = selectedUserDetails; // {}
+    //             // Get the Calories consumed
+    //             const calorieDiaryArr = selectedCalorieDiary; // [{}, {}]
+    //             const userWeight = parseFloat(detailsObj.weight);
+    //             let RDI;
+    //             const checkActivityLevel = (activityLevel) => {
+    //                 if (activityLevel === 'light') {
+    //                     return RDI *= 1.55;
+    //                 } else if (activityLevel === 'moderate') {
+    //                     return RDI *= 1.65;
+    //                 } else if (activityLevel === 'heavy') {
+    //                     return RDI *= 1.8;
+    //                 }
+    //             }
+    //             const checkDietGoal = (dietGoal) => {
+    //                 if (dietGoal === 'wl') {
+    //                     return RDI -= 500;
+    //                 } else if (dietGoal === 'swl') {
+    //                     return RDI -= 300;
+    //                 } else if (dietGoal === 'swg') {
+    //                     return RDI += 200;
+    //                 } else if (dietGoal === 'wg') {
+    //                     return RDI += 500;
+    //                 } else {
+    //                     return RDI
+    //                 }
+    //             }
+    //             const calculateRDI = (weight, gender, activityLevel, dietGoal) => {
+    //                 RDI = weight * 24;
+    //                 if (gender === 'female') {
+    //                     RDI *= 0.9;
+    //                 }
+    //                 checkActivityLevel(activityLevel);
+    //                 checkDietGoal(dietGoal);
+    //                 RDI = Math.floor(RDI);
+    //                 return RDI;
+    //             }
+    //             calculateRDI(userWeight, detailsObj.gender, detailsObj.activity_level, detailsObj.diet_goal);
 
-                // We calculate the total calories consumed by THAT user That particular day
-                let totalCalories = 0;
-                const calculateTotalCalories = (arr) => {
-                    for (let i = 0; i < arr.length; i++) {
-                        totalCalories += arr[i].calories;
-                    }
-                    return totalCalories;
-                }
-                calculateTotalCalories(calorieDiaryArr);
-                // console.log(`inside grabData()`, RDI, totalCalories);
-                const caloriesLeft = RDI - totalCalories;
-                const obj = {
-                    consumed : `${totalCalories}`,
-                    remaining : `${caloriesLeft}`
-                }
-                response.send(obj); //{}
-            })
-        })
-    }
+    //             // We calculate the total calories consumed by THAT user That particular day
+    //             let totalCalories = 0;
+    //             const calculateTotalCalories = (arr) => {
+    //                 for (let i = 0; i < arr.length; i++) {
+    //                     totalCalories += arr[i].calories;
+    //                 }
+    //                 return totalCalories;
+    //             }
+    //             calculateTotalCalories(calorieDiaryArr);
+    //             // console.log(`inside grabData()`, RDI, totalCalories);
+    //             const caloriesLeft = RDI - totalCalories;
+    //             const obj = {
+    //                 consumed : `${totalCalories}`,
+    //                 remaining : `${caloriesLeft}`
+    //             }
+    //             response.send(obj); //{}
+    //         })
+    //     })
+    // }
 
     // Export the func()..
     return {
         dataForm : dataForm,
         insertData : insertData,
         insertFoodData : insertFoodData,
-        homePage : homePage,
-        grabData : grabData
+        // pickDate : pickDate,
+        homePage : homePage
+        // grabData : grabData
     }
 }

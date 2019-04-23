@@ -6,6 +6,12 @@ const cookieParser = require('cookie-parser');
 const SALT =  'random';
 
 module.exports = (db) => {
+
+    // app.get(`/`)
+    const rootPage = (request, response) => {
+        response.render('rootpage');
+    };
+
     // app.get(`/register`)
     const registrationForm = (request, response) => {
         response.render('register');
@@ -48,6 +54,7 @@ module.exports = (db) => {
 
     // Export the func()
     return {
+        rootPage : rootPage,
         registrationForm : registrationForm,
         registerUser : registerUser,
         loginPage : loginPage,
