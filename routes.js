@@ -6,16 +6,21 @@ module.exports = (app, allModels) => {
     app.get(`/`, userController.rootPage);
     app.get(`/register`, userController.registrationForm);
     app.post(`/register`, userController.registerUser);
-    app.get(`/login`, userController.loginPage);
     app.post(`/login`, userController.userAuthentication);
-    // User must be logged in before he/she can submit newuser's data...
-    app.get(`/newuser`, dataController.dataForm);
-    app.post(`/newuser`, dataController.insertData);
-    app.post(`/newfood`, dataController.insertFoodData);
-    // app.get(`/grabdata`, dataController.grabData);
-    // app.get(`/pickdate`, dataController.pickDate);
-    // This is the 'homePage'
-    app.get(`/:id`, dataController.homePage);
-    // app.get(`/:id/progress`, );
-    // app.get(`/:id/edit`, );
+    app.get(`/logout`, userController.logOut);
+
+    app.get(`/newuser`, dataController.userForm);
+    app.post(`/newuser`, dataController.insertUserData);
+
+    app.get(`/home`, dataController.homePage);
+
+    app.get(`/food`, dataController.foodPage);
+    app.post(`/food`, dataController.insertFood);
+    app.delete(`/food`, dataController.deleteFood);
+
+    app.get(`/calorie`, dataController.caloriePage);
+    app.post(`/calorie`, dataController.filterByDay);
+
+    app.get(`/update`, dataController.updateForm);
+    app.post(`/update`, dataController.updateData);
 };

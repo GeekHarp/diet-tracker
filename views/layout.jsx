@@ -1,6 +1,6 @@
 const React = require(`react`);
 
-class DefaultLayout extends React.Component {
+class Layout extends React.Component {
     render() {
         return (
             <html>
@@ -12,19 +12,9 @@ class DefaultLayout extends React.Component {
                       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
                       crossorigin="anonymous"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-                    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+                    <link rel="stylesheet" type="text/css" href="./css/styling.css"/>
                 </head>
                 <body>
-                    <nav className="ui secondary menu">
-                      <a className="item" href="/home">Simple Weight Tracker</a>
-                      <a className="item" href="/food">Food Intake</a>
-                      <a className="item" href="/calorie">Calorie Tracker</a>
-                      <a className="item" href="/update">Settings</a>
-                      <div className="right menu">
-                        <p className="ui item">Hi, {this.props.username}</p>
-                        <a className="ui item" href="/logout">Log Out</a>
-                      </div>
-                    </nav>
                     {this.props.children}
                     <script type="text/javascript" src="./script.js"></script>
                 </body>
@@ -33,4 +23,4 @@ class DefaultLayout extends React.Component {
     }
 }
 
-module.exports = DefaultLayout;
+module.exports = Layout;

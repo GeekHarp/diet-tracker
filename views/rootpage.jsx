@@ -1,23 +1,29 @@
 const React = require(`react`);
-const DefaultLayout = require(`./default.jsx`);
+const Layout = require(`./layout.jsx`);
 
 class Rootpage extends React.Component {
     render() {
         return (
-            <html>
-            <head>
-                <title>Calories Tracker</title>
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-                <link rel="stylesheet" type="text/css" href="/css/style.css" />
-            </head>
-            <body>
-                <div>
-                    <h1>Calories Tracker</h1>
-                    <a class="btn btn-primary" href="/register" role="button">Sign Up</a>
-                    <a class="btn btn-primary" href="/login" role="button">Log In</a><br />
+            <Layout>
+            <div class="big-container">
+                <div class="ui raised very padded text container segment">
+                    <h1>Simple Weight Tracker</h1>
+                    <h1>Log In</h1>
+                    <form action="/login" method="POST" class="ui form">
+                        <div class="field">
+                            <label>Username</label>
+                            <input type="text" name="username"placeholder="Username" />
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Password" />
+                        </div>
+                        <input type="submit" value="Log In" class="ui basic black button" /> <br />
+                        <a href="/register" >Register</a>
+                    </form>
                 </div>
-            </body>
-            </html>
+            </div>
+            </Layout>
         );
     }
 }

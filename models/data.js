@@ -27,14 +27,9 @@ module.exports = (dbPoolInstance) => {
                 callback(error, null);
             } else {
                 if (queryResult.rows.length > 0) {
-                    // This will return an arr of 'calories'
-                    // console.log(`******************************`);
-                    // console.log(`Inside models = ${queryResult.rows}`); // [{}, {}]
                     callback(null, queryResult.rows);
                 } else {
-                    callback(null, [{
-                        calories : 0
-                    }]);
+                    callback(null, null);
                 }
             }
         })
@@ -50,7 +45,7 @@ module.exports = (dbPoolInstance) => {
                 if (queryResult.rows.length > 0) {
 
                     callback(null, queryResult.rows[0]);
-                    console.log(`New Data Inserted`);
+                    console.log(`There were changes in DB`);
                 } else {
                     callback(null, null);
                 }
