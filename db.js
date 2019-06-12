@@ -21,7 +21,7 @@ if (process.env.DATABASE_URL){
     configs = {
         user: 'andyng',
         host: '127.0.0.1',
-        database: 'diet_tracker',
+        database: 'weight_tracker',
         port: 5432
     };
 }

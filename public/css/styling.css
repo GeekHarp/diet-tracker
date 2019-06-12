@@ -1,0 +1,20 @@
+body {
+	background-image: url(/image/background-image.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #464646;
+}
+
+.big-container {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.ui.form {
+	background-color: rgba(0, 255, 0, .4);
+	padding: 25px;
+	border-radius: 30px;
+}

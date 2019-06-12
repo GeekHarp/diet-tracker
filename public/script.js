@@ -1,59 +1,113 @@
-// const userInput = document.getElementById(`calories-input`);
-// const button = document.getElementById(`input-button`);
+// /food<form>
+$('.ui.form')
+  .form({
+    fields: {
+      calories: {
+        identifier: 'calories',
+        rules: [
+          {
+            type   : 'integer',
+            prompt : 'Please enter an integer value'
+          }
+        ]
+      },
+      desc: {
+        identifier: 'desc',
+        rules: [
+        {
+            type   : 'empty',
+            prompt : 'Please enter description'
+        }
+        ]
+      }
+    }
+  })
+;
 
-// parseFloat(userInput.value);
-// const userSubmit = () => {
-//     // Make new request
-//     const request = new XMLHttpRequest();
-//     // Listen for it..
-//     request.addEventListener(`load`, responseHandler);
-//     // Goes to this URL to grab stuff..
-//     const url = `http://localhost:3000/grabdata`
-//     request.open(`get`, url);
-//     // send the request
-//     request.send();
-// }
+// /update<form>
+$('.ui.form.two')
+  .form({
+    fields: {
+      weight: {
+        identifier: 'weight',
+        rules: [
+          {
+            type   : 'integer',
+            prompt : 'Please enter a Integer'
+          }
+        ]
+      },
+      goal_weight: {
+        identifier: 'goal_weight',
+        rules: [
+          {
+            type   : 'integer',
+            prompt : 'Please enter a Integer'
+          }
+        ]
+      }
+    }
+  })
+;
 
-// Code to run when we receive the request..
-var responseHandler = () => {
-    console.log(this.responseText);
-    var response = JSON.parse(this.responseText);
-    // console.log(response);
-
-    // console.log(`statusText = ${this.statusText}`); // OK
-    // console.log(`status code = ${this.status}`); // 200
-    // const ctx = document.getElementById(`myChart`);
-
-    // // Global Options
-    // // Chart.defaults.global.defaultFontFamily = '';
-    // // Chart.defaults.global.defaultFontSize = ;
-    // // Chart.defaults.global.defaultFontColor = '';
-
-    // const myPieChart = new Chart(ctx, {
-    //     type: 'pie',
-    //     data: {
-    //         // These labels appear in the legend and in the tooltips when hovering different arcs
-    //         labels: ['Calories Consumed', 'Calories Left'],
-    //         datasets: [
-    //         {
-    //             backgroundColor: ['#ff0000','#00ff00'],
-    //             data: [response.consumed, response.remaining]
-    //         }
-    //         ]
-    //     }
-    // });
-};
-
-window.onload = function(){
-    // button.addEventListener(`click`, function(){
-        // Create a new req
-        var request = new XMLHttpRequest();
-        // Listen for the req(?)
-        request.addEventListener("load", responseHandler);
-        // Goes to the below link and 'grab' stuff
-        var url = "http://localhost:3000/grabdata";
-        request.open("GET", url);
-        // Send the req
-        request.send();
-    // })
-}
+// /newuser<form>
+$('.ui.form.three')
+  .form({
+    fields: {
+      gender: {
+        identifier: 'gender',
+        rules: [
+          {
+            type   : 'checked',
+            prompt : 'Please select your Gender'
+          }
+        ]
+      },
+      activity_level: {
+        identifier: 'activity_level',
+        rules: [
+          {
+            type   : 'checked',
+            prompt : 'Please select an Activity Level'
+          }
+        ]
+      },
+      diet_goal: {
+        identifier: 'diet_goal',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please select a Diet Goal'
+          }
+        ]
+      },
+      weight: {
+        identifier: 'weight',
+        rules: [
+          {
+            type   : 'integer',
+            prompt : 'Please enter a Integer'
+          }
+        ]
+      },
+      goal_weight: {
+        identifier: 'goal_weight',
+        rules: [
+          {
+            type   : 'integer',
+            prompt : 'Please enter a Integer'
+          }
+        ]
+      },
+      goal_weight: {
+        identifier: 'goal_weight',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please pick a Goal Date'
+          }
+        ]
+      }
+    }
+  })
+;

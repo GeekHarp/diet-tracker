@@ -2,6 +2,8 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+var moment = require('moment');
+moment().format();
 
 const app = express();
 
